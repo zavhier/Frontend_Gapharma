@@ -1,0 +1,29 @@
+<div class="content">
+    <div class="row">
+      <div class="class col-12">
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Comentario</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of _listCliente">
+                  <td><img src='{{item.avatar}}'alt=""  style ="border-radius: 20px;width: 12%;" width="130" alt="foto de  {{item.name}}"/></td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.createdAt}}</td>
+                  <td>{{item.comentarios}}</td>
+                  <td>
+                      <button type="button" class="btn btn-primary m-2" (click)="modificar(item);">Modificar</button>
+                      <button type="button" class="btn btn-danger" (click)="borrar(item);">Borrar</button>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+</div>
