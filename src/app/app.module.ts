@@ -7,18 +7,30 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import {HttpClientModule} from '@angular/common/http';
 import {ClientesService} from './services/clientes.service';
+import { PedidosComponent } from './pages/pedidos/pedidos.component';
+import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './pages/login/login.component';
+import {PedidosService} from './services/pedidos.service';
+import { DestinatariosService } from  './services/destinatarios.service'
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     FooterComponent,
-    ClientesComponent
+    ClientesComponent,
+    PedidosComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
-  providers: [ClientesService],
+  providers: [
+    ClientesService, 
+    PedidosService,
+    DestinatariosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

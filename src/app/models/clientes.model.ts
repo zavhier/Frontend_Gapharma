@@ -1,6 +1,11 @@
+import { NumberValueAccessor } from '@angular/forms';
+
 export class Cliente {
-    name :String; 
-    avatar:string;
-    createdAt :string;
-    comentarios:string;
+    Cliente_id :number;
+    Razon_social : string;
+    Tipo_estado : string;
+    Nombre : string;
+    Apellido  : string; 
+    Email :string;
+    Telefono_1 : number;
 }

@@ -5,21 +5,31 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
+                <th scope="col">Razon socila</th>
+                <th scope="col">Estado</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Comentario</th>
-                <th scope="col">Acciones</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Email</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Acción</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of _listCliente">
-                  <td><img src='{{item.avatar}}'alt=""  style ="border-radius: 20px;width: 12%;" width="130" alt="foto de  {{item.name}}"/></td>
-                  <td>{{item.name}}</td>
-                  <td>{{item.createdAt}}</td>
-                  <td>{{item.comentarios}}</td>
+                  <td>{{item.Cliente_id}}</td>
+                  <td>{{item.Razon_social}}</td>
+                  <td>{{item.Tipo_estado}}</td>
+                  <td>{{item.Nombre}}</td>
+                  <td>{{item.Apellido}}</td>
+                  <td>{{item.Email}}</td>
+                  <td>{{item.Telefono_1}}</td>
                   <td>
-                      <button type="button" class="btn btn-primary m-2" (click)="modificar(item);">Modificar</button>
-                      <button type="button" class="btn btn-danger" (click)="borrar(item);">Borrar</button>
+                    <div class="input-group">
+                      <button  class="btn btn-outline-primary fom-control btn-grid"><i class="fa fa-eye"></i></button>
+                      <button  class="btn btn-outline-success fom-control btn-grid"><i class="fa fa-search"></i></button>
+                      <button  class="btn btn-outline-danger fom-control btn-grid"><i class="fa fa-trash"></i></button>
+                  </div>
+                      
                   </td>
               </tr>
             </tbody>

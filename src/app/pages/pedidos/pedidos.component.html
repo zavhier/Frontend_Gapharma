@@ -1,0 +1,94 @@
+<app-menu></app-menu>
+<div class="content">
+   <div class="row">
+      <div class="class col-6">
+          <form (ngSubmit)="buscar( termino.value )" class="form-horizontal col-md-12 p-0">
+                <i *ngIf="!estaBuscando" class="fa fa-search icon-header-buscar-ped"></i>
+                <i *ngIf="estaBuscando" class="fa fa-spinner fa-spin icon-header-buscar-ped"></i>
+                <input name="_termino" #termino (keyup)="VaciarBusqueda( termino.value )" placeholder="Buscar por Cliente" type="text" class="form-control txt-header-buscar-ped" style="color: #868e96; margin-left: 17px;  margin-top: -21px;">
+                <span class="float-right text-enter-buscar" style="margin-top: -21px;">Presione 'Enter' para buscar</span>
+                <i *ngIf="_termino.length > 0" class="fa fa-times-circle icon-delete-buscar float-right" (click)="_termino = ''; buscar('')"></i>
+            </form>
+
+      </div>
+      <div class="class col-6">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="float: right;">
+         + Nuevo
+        </button>
+      </div>
+   </div>
+    <div class="row">
+      <div class="class col-12">
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>          
+                <th scope="col">#</th>
+                <th scope="col">Fecha emisión</th>
+                <th scope="col">Fecha envio</th>
+                <th scope="col">Fecha retiro</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Destinatario</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Sevicio</th>
+                <th scope="col">Empresa</th>   
+                <th scope="col">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of sListPedidos">
+                  <td>{{item.Cabecera_id}}</td>
+                  <td>{{item.Fecha_emision}}</td>
+                  <td>{{item.Fecha_envio | date}}</td>
+                  <td>{{item.Fecha_retiro}}</td>
+                  <td>{{item.Cliente}}</td>
+                  <td>{{item.Destinatario}}</td>
+                  <td>{{item.Estado}}</td>
+                  <td>{{item.Servicio}}</td>
+                  <td>{{item.Empresa}}</td>
+                  <td>
+                    <div class="input-group">
+                         <button  class="btn btn-outline-primary fom-control btn-grid"><i class="fa fa-eye"></i></button>
+                    </div>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo Pedido</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="row">
+              <div class="class col-4">
+                <select  name="destinatario" class="form-control" style="width: 200px;">
+                  <option value="0">Seleccionar</option>
+                  <option [value]="des.DESTINATARIO_ID" *ngFor="let des of sListDestinatario" > {{ des.RAZON_SOCIAL}} </option>
+                </select>
+              </div>
+              <div class="class col-4" style="margin-left: 46px;">
+                <input type="date"  class="form-control"  name="input" placeholder="yyyy-MM-dd" min="2013-01-01" max="2013-12-31" required />
+              </div>
+              <div class="class col-4">
+
+              </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+

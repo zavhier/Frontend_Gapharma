@@ -7,11 +7,13 @@ import {Cliente} from '../models/clientes.model';
 })
 export class ClientesService {
 
+   uri : string = 'http://localhost:54375/api/Cliente';
   constructor( private  http: HttpClient) {
 
 
    }
   public getAll():Observable<Cliente[]>{
-    return this.http.get<Cliente[]>('https://5d8e0e14370f02001405c813.mockapi.io/usuarios');
+    //return this.http.get<Cliente[]>('https://5d8e0e14370f02001405c813.mockapi.io/usuarios');
+     return this.http.get<Cliente[]>(this.uri);
    }
 }
