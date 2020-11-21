@@ -7,6 +7,8 @@ import {Cliente} from '../models/clientes.model';
 })
 export class ClientesService {
 
+  public sClienteService: number;
+
    uri : string = 'http://localhost:54375/api/Cliente';
   constructor( private  http: HttpClient) {
 

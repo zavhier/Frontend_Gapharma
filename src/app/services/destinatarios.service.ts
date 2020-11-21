@@ -10,6 +10,10 @@ export class DestinatariosService {
   constructor(private http  : HttpClient) { }
 
   getByIdAll(sCliente_id : number):Observable<Destianatario[]>{
+    debugger;
     return this.http.get<Destianatario[]>(`${this.urlEndPoint}/${sCliente_id}`);
+  }
+  save(sDestinatario : Destianatario):Observable<Destianatario>{
+    return  this.http.post<Destianatario>(this.urlEndPoint , sDestinatario);
   }
 }

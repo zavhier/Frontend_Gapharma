@@ -37,9 +37,9 @@
             <tbody>
               <tr *ngFor="let item of sListPedidos">
                   <td>{{item.Cabecera_id}}</td>
-                  <td>{{item.Fecha_emision}}</td>
-                  <td>{{item.Fecha_envio | date}}</td>
-                  <td>{{item.Fecha_retiro}}</td>
+                  <td>{{item.Fecha_emision | date : 'dd/MM/yyyy'}}</td>
+                  <td>{{item.Fecha_envio   | date : 'dd/MM/yyyy'}}</td>
+                  <td>{{item.Fecha_retiro  | date : 'dd/MM/yyyy'}}</td>
                   <td>{{item.Cliente}}</td>
                   <td>{{item.Destinatario}}</td>
                   <td>{{item.Estado}}</td>
@@ -56,9 +56,10 @@
       </div>
     </div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+
+
+<div class="modal fade bd-example-modal-lg" id="exampleModal"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Nuevo Pedido</h5>
@@ -67,28 +68,80 @@
         </button>
       </div>
       <div class="modal-body">
-            <div class="row">
-              <div class="class col-4">
-                <select  name="destinatario" class="form-control" style="width: 200px;">
-                  <option value="0">Seleccionar</option>
-                  <option [value]="des.DESTINATARIO_ID" *ngFor="let des of sListDestinatario" > {{ des.RAZON_SOCIAL}} </option>
-                </select>
+              <div class="row">
+                  <div class="class col-3">
+                      <select  name="destinatario" class="form-control" style="width: 200px;" [(ngModel)]="sCabeceraDocumento.DESTINATARIO_ID">
+                        <option value="0">Seleccionar</option>
+                        <option [value]="des.DESTINATARIO_ID" *ngFor="let des of sListDestinatario" > {{ des.RAZON_SOCIAL}} </option>
+                      </select>
+                  </div>
+                  <div class="class col-3" style="margin-left: 46px;">
+                      <!--<input type="date"  class="form-control"  name="input" placeholder="yyyy-MM-dd" min="2013-01-01" max="2013-12-31" required />-->  
+                      <select  name="destinatario" style="width: 200px;" class="form-control form-control-mt select-mt"  [(ngModel)]="sCabeceraDocumento.SERVICIO_ID"  #servicio (change)="change(servicio.value);">
+                        <option value="0">Seleccionar</option>
+                        <option [value]="des.SERVICIO_ID" *ngFor="let des of sListServicio" >{{ des.NOMBRE}} </option>
+                      </select> 
+                  </div>
+                  <div class="class col-5" style="margin-bottom: 40px; margin-top: 16px;">
+                      <div   *ngIf="_tipoDeServicio != ''">               
+                         <span style="margin-left: 8px;">{{_tipoDeServicio}}</span>
+                      </div>
+                  </div>
               </div>
-              <div class="class col-4" style="margin-left: 46px;">
-                <input type="date"  class="form-control"  name="input" placeholder="yyyy-MM-dd" min="2013-01-01" max="2013-12-31" required />
+              <div class="row">
+                 <span  *ngIf="_tipoDeServicio != ''" style="margin-left: 2%;margin-bottom: 2%;">Paquetes</span>
               </div>
-              <div class="class col-4">
-
+              <div class="row"  *ngIf="_tipoDeServicio != ''">
+                    <div class="class col-3">
+                        <select  name="servicio" style="width: 200px;" class="form-control form-control-mt select-mt"   #servicio (change)="changePaquete(servicio.value);">
+                          <option value="0">Seleccionar</option>
+                          <option [value]="des.PAQUETE_ID" *ngFor="let des of sListPaquetes" >{{ des.DESCRIPCION}} </option>
+                        </select> 
+                    </div>
+                    <div class="class col-3">
+                        <input type="number" id="points" name="points" step="1"  min="0"  class="form-control"  [(ngModel)]="sCantidad" style="margin-left: 60px;" (keydown.enter)="onEnter($event)"  />
+                    </div> 
+                    <div class="class col-5" style="margin-bottom: 40px; margin-top: 16px;">
+                      <div   *ngIf="_tipoDeServicio != ''">               
+                         <span style="margin-left: 15%;">{{sTipoDePaquete}}</span>
+                      </div>
+                  </div>
               </div>
+              <div class="row" *ngIf="_tipoDeServicio != ''" style="margin-top: 2%;"> 
+                  <table class="table">
+                            <thead class="thead-dark">
+                            <tr>          
+                              <th scope="col">Nombre</th>
+                              <th scope="col">Paquete</th>
+                              <th scope="col">Cantidad</th>  
+                              <th scope="col">Acción</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of sCabeceraDocumento.Detalle">
+                               <td>{{item.NOMBRE}}</td> 
+                               <td>{{item.PAQUETE_ID}}</td>
+                                <td>{{item.CANTIDAD}}</td>                        
+                                <td>
+                                  <div class="input-group">
+                                      <button  class="btn btn-outline-primary fom-control btn-grid"><i class="fa fa-trash"></i></button>
+                                  </div>
+                                </td>
+                            </tr>
+                          </tbody>
+                    </table>
+             </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary"  (click)="onSave();">Guardar</button>
             </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
 </div>
+
+
+
 
 <app-footer></app-footer>
 

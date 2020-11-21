@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    // this.router.navigate(['pedidos', { queryParams: { id: 1 } }]);
-     this.router.navigate(['/pedidos/1']);
+      this.router.navigate(['/pedidos/1']);
   }
 }
