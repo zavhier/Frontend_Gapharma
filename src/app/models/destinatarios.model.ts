@@ -1,10 +1,10 @@
 export class Destianatario{
-    
-    Destinatario_id :number
-    Razon_social :string
-    Direccion_entrega : string
-    Codigo_postal :string
-    Cliente_id : number
-    Persona_id : number
+
+   DESTINATARIO_ID :number ;
+   RAZON_SOCIAL :string; 
+   DIRECCION_ENTREGA : string;
+   CODIGO_POSTAL :string;
+   CLIENTE_ID: number;
+   PERSONA_ID  : number;
 
 }

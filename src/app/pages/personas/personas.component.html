@@ -1,1 +1,42 @@
-<p>personas works!</p>
+<app-menu></app-menu>
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>          
+                    <th scope="col">#</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">CUIL</th>
+                    <th scope="col">DIRECCION</th>
+                    <th scope="col">CIUDAD</th>
+                    <th scope="col">LOCALIDAD</th>
+                    <th scope="col">NOMBRE</th>
+                    <th scope="col">APELLIDO</th>
+                    <th scope="col">EMAIL</th>   
+                    <th scope="col">TELEFONO_1</th>
+                    <th scope="col">TELEFONO_2</th>
+                    <th scope="col">CODIGO_POSTAL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                     <tr *ngFor="let item of sListPersona">
+                      <td>{{item.PERSONA_ID}}</td>
+                      <td>{{item.DNI }}</td>
+                      <td>{{item.CUIL}}</td>
+                      <td>{{item.DIRECCION}}</td>
+                      <td>{{item.CIUDAD}}</td>
+                      <td>{{item.LOCALIDAD}}</td>
+                      <td>{{item.NOMBRE}}</td>
+                      <td>{{item.APELLIDO}}</td>
+                      <td>{{item.EMAIL}}</td>
+                      <td>{{item.TELEFONO_1}}</td>
+                      <td>{{item.TELEFONO_2}}</td>
+                      <td>{{item.CODIGO_POSTAL}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

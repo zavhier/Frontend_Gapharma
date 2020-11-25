@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Persona } from 'src/app/models/persona.models';
+import { PersonasService } from 'src/app/services/personas.service';
 
 @Component({
   selector: 'app-personas',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonasComponent implements OnInit {
 
-  constructor() { }
-
+  sListPersona : Persona [] =[];
+  constructor(private _personaService : PersonasService) { }
   ngOnInit(): void {
+     this._personaService.getAll().subscribe(resp=>{
+        this.sListPersona = resp;
+     })
   }
 
 }

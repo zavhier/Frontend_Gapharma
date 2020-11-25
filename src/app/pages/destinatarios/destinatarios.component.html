@@ -103,7 +103,7 @@
                 <input  type="text" [(ngModel)]="sPersona.TELEFONO_1" class="form-control" placeholder="Telefono"/>
             </div>
             <div class="col-6">
-              <input  type="text" [(ngModel)]="sPersona.TELEFONO_1" class="form-control" placeholder="Celular"/>
+              <input  type="text" [(ngModel)]="sPersona.TELEFONO_2" class="form-control" placeholder="Celular"/>
             </div>
          </div>
 
@@ -129,18 +129,18 @@
      <div class="modal-body">
          <div class="row" style="margin-bottom: 4px;">
             <div class="col-6">
-                <input  type="text"  class="form-control" placeholder="Razon social" />
+                <input  type="text"  [(ngModel)]=sDestinatario.RAZON_SOCIAL  class="form-control" placeholder="Razon social" />
             </div>
             <div class="col-6">
-              <input  type="text" class="form-control" placeholder="Direccion"/>
+              <input  type="text" [(ngModel)]=sDestinatario.DIRECCION_ENTREGA  class="form-control" placeholder="Dirección"/>
             </div>
          </div>
          <div class="row" style="margin-bottom: 4px;">
             <div class="col-6">
-                <input  type="text" class="form-control" placeholder="Código postal"/>
+                <input  type="text"[(ngModel)]=sDestinatario.CODIGO_POSTAL  class="form-control" placeholder="Código postal"/>
             </div>
             <div class="col-6">
-                <select  name="servicio" style="width: 200px;" class="form-control form-control-mt select-mt" >
+                <select  name="servicio"  [(ngModel)]=sDestinatario.PERSONA_ID  style="width: 200px;"  #servicio (change)="change(servicio.value);" class="form-control form-control-mt select-mt" >
                   <option value="0">Seleccionar</option>
                    <option [value]="des.PERSONA_ID" *ngFor="let des of sListPersona" >{{ des.NOMBRE}} {{des.APELLIDO}} </option>
                 </select> 
@@ -151,7 +151,7 @@
      </div>
       <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" >Guardar</button>
+                <button type="button" class="btn btn-primary" (click)="onSaveDestinatario();" >Guardar</button>
       </div>
    </div>
  </div>

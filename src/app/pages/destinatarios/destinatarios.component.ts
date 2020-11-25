@@ -21,11 +21,10 @@ export class DestinatariosComponent implements OnInit {
   estaBuscando: boolean;
   _termino:string = '';
   sPersona : Persona = new Persona();
+  sDestinatario : Destianatario  = new Destianatario();
   ngOnInit(): void {
-    this.toastr.success('Se creo una nueva solicitud!', 'Toastr fun!');  
-      this._destinatarioService.getByIdAll(this._clienteService.sClienteService).subscribe(resp=>{
-          this.sListDestinatrio = resp;
-      })
+   
+    this.inicializar();
 
       this._servicioPersona.getAll().subscribe(resp=>{
          this.sListPersona = resp;
@@ -42,6 +41,7 @@ export class DestinatariosComponent implements OnInit {
   }
   getPersona(sPersona : number){
        this._servicioPersona.getByid(sPersona).subscribe(resp=>{
+        debugger;
         Swal.fire({
           position: 'top',
           icon: 'success',
@@ -51,13 +51,30 @@ export class DestinatariosComponent implements OnInit {
         })
     })
     
-    
-    
   }
   onSave(){
       console.log(this.sPersona);
-        this._servicioPersona.save(this.sPersona).subscribe(resp=>{
-        
+        this._servicioPersona.save(this.sPersona).subscribe(resp=>{ 
+          this.toastr.success('Se creo una nueva Persona!', 'Toastr fun!');  
+          this.sPersona = new Persona();
       })
   }
+  onSaveDestinatario(){
+    this.sDestinatario.CLIENTE_ID = this._clienteService.sClienteService;
+    this._destinatarioService.save(this.sDestinatario).subscribe(resp=>{
+        this.toastr.success('Se creo una nueva Persona!', 'Toastr fun!');  
+        this.sDestinatario = new Destianatario();
+        this.inicializar();
+    })
+
+  }
+  change( value: number){
+     this.sDestinatario.PERSONA_ID = value;
+  }
+  inicializar():void{
+    this._destinatarioService.getByIdAll(this._clienteService.sClienteService).subscribe(resp=>{
+      this.sListDestinatrio = resp;
+    })
+  }
+
 }

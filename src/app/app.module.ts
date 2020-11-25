@@ -21,7 +21,9 @@ import { DestinatariosComponent } from './pages/destinatarios/destinatarios.comp
 import {PersonasService}  from  './services/personas.service';
 import { PersonasComponent } from './pages/personas/personas.component';
 import Swal from 'sweetalert2';
-
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import {MatSidenavModule} from '@angular/material/sidenav/';
+import {MatListModule} from '@angular/material/list';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,8 @@ import Swal from 'sweetalert2';
     PedidosComponent,
     LoginComponent,
     DestinatariosComponent,
-    PersonasComponent
+    PersonasComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
