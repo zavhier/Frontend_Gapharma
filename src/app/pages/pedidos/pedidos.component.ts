@@ -13,6 +13,11 @@ import { Detalle_documento } from '../../models/Detalle_documento.model';
 import {Estado}  from  '../../enums/estado.enum';
 import { ToastrService } from 'ngx-toastr';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { Zonas } from 'src/app/models/Zonas.models';
+import {ZonasService}  from '../../services/zonas.service';
+import {VehiculosService}  from '../../services/vehiculos.service';
+import {TransportistaService}  from '../../services/transportista.service';
+import { Vehiculo } from 'src/app/models/Vehiculo.models';
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.component.html',
@@ -31,13 +36,16 @@ export class PedidosComponent implements OnInit {
   sTipoDePaquete: string;
   sCabeceraDocumento  : CabeceraDocumento = new CabeceraDocumento();
   sDetallle : Detalle_documento = new Detalle_documento();
+  sListZonas  : Zonas[]  = [];
   sCantidad : number =0;
   sPaquete_id : number;
   sNombrePaquete: string;
   sServicio : number;
+  sListVehiculo : Vehiculo [] =[];
+
   constructor(private  _pedidoService : PedidosService, private activatedRoute : ActivatedRoute,
      private _destinatarioService : DestinatariosService, private _servicioService : ServiciosService,
-     private _paqueteService : PaquetesService ,
+     private _paqueteService : PaquetesService , private _zonaService : ZonasService, private _vehiculoService : VehiculosService, private _transportistaServices: TransportistaService,
      private toastr: ToastrService, private _clienteService : ClientesService) { }
 
    ngOnInit(): void {
@@ -116,5 +124,21 @@ export class PedidosComponent implements OnInit {
           console.log('Se guardor correctamente ');
           this.toastr.success('Se creo una nueva solicitud!', 'Toastr fun!');  
        });
+  }
+
+  onAsignar(sPedido : Pedido){
+      this._zonaService.getByIdAll(sPedido.Codigo_postal).subscribe(resp=>{
+            this.sListZonas = resp;
+
+            console.log(this.sListZonas);
+      })
+
+  }
+
+  changeZona(value : number){
+      this._vehiculoService.getByIdAll(value).subscribe(resp=>{
+         this.sListVehiculo = resp;
+
+      })
   }
 }

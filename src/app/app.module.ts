@@ -24,6 +24,9 @@ import Swal from 'sweetalert2';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import {MatSidenavModule} from '@angular/material/sidenav/';
 import {MatListModule} from '@angular/material/list';
+import {TransportistaService} from './services/transportista.service';
+import {VehiculosService} from  './services/vehiculos.service';
+import {ZonasService} from './services/zonas.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +58,10 @@ import {MatListModule} from '@angular/material/list';
     DestinatariosService,
     ServiciosService,
     PaquetesService,
-    PersonasService
+    PersonasService,
+    ZonasService,
+    TransportistaService,
+    VehiculosService
   ],
   bootstrap: [AppComponent]
 })

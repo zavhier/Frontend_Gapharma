@@ -9,5 +9,5 @@ export class Pedido{
     Estado : string;
     Servicio : string;  
     Empresa : string;
-
+    Codigo_postal : number;
 }

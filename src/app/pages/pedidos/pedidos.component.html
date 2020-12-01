@@ -12,7 +12,7 @@
             </form>
 
       </div>
-      <div class="class col-6">
+      <div class="class col-6"  *ngIf="sCliente_id > 0">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="float: right;">
          + Nuevo
         </button>
@@ -49,6 +49,7 @@
                   <td>
                     <div class="input-group">
                          <button  class="btn btn-outline-primary fom-control btn-grid"><i class="fa fa-eye"></i></button>
+                         <button  style="margin-left: 2px;" *ngIf="!sCliente_id > 0"  (click)="onAsignar(item)" data-toggle="modal"  data-target="#asignarModal" class="btn btn-outline-primary fom-control btn-grid"><i class="fa fa-bus"></i></button>
                     </div>
                   </td>
               </tr>
@@ -139,6 +140,45 @@
       </div>
     </div>
   </div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" id="asignarModal"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Asignar Pedido</h5>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body">
+          <div class="row" style="margin-bottom: 2px;">
+              <div class="class col-12">
+                  <select  name="zonas" style="width:100%;" class="form-control form-control-mt select-mt" #zonas  (change)="changeZona(zonas.value);">
+                          <option value="0">Seleccionar</option>
+                          <option [value]="des.ZONA_UNIFICADA" *ngFor="let des of sListZonas" > {{ des.DESCRIPCION_PARTIDO}} {{des.LOCALIDAD}}</option>
+                    </select>
+              </div>
+          </div>
+          <div class="row" style="margin-bottom: 2px;">
+            <div class="class col-12">
+                <select  name="vehiculo" style="width:100%;" class="form-control form-control-mt select-mt"   #vehiculo>
+                        <option value="0">Seleccionar</option>
+                        <option [value]="des.VEHICULO_ID" *ngFor="let des of sListVehiculo" > {{ des.MARCA}} {{des.MODELO}}</option>
+                  </select>
+            </div>
+        </div>
+
+            
+           <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             <button type="button" class="btn btn-primary"  (click)="onSave();">Guardar</button>
+           </div>
+     </div>
+   </div>
+ </div>
 </div>
 
 
